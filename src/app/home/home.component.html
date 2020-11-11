@@ -1,0 +1,26 @@
+<!-- banner image display -->
+<div id="home" *ngIf="id? false:true">
+  <div class="banner" *ngIf="slide">
+   <img src="{{slide}}" class="image_size" alt="Random slide">
+   </div>
+<div>
+  <ng-template ngFor let-item [ngForOf]="allCategorys" let-i="index" [ngForTrackBy]="category">
+    
+    <div class="row headings">
+      <div class="col-sm-6">
+        {{item.category}}
+      </div>
+      <div class="col-sm-6 viewAll">
+        View All
+      </div>
+    </div>  
+   
+        <carousel>
+          <div class="carousel-cell"  *ngFor="let eachitem of item.videos">
+            <img src="{{eachitem.thumbUrl}}" id="carousel-image" alt="" (click)="getId(eachitem.videoId, item.category)">
+          </div>
+        </carousel>
+  </ng-template>
+</div>
+</div>
+<app-video [id]="id" [videoArray]="videoPass" *ngIf="!video_selected" ></app-video>

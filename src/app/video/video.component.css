@@ -1,0 +1,55 @@
+.video_details{
+background-color: black;
+height: 100%;
+  width:100%;
+  margin: 0px;
+  padding-top:8%;
+  padding-left: 3%;
+  overflow-x: hidden;
+}
+.player-section{
+    padding-right: 3%;
+}
+.icons{
+    background:none;
+    border:none;
+}
+.video-js {
+ 
+    width: 100% ;
+    height: 350px;
+}
+.detail{
+    color: white;
+}
+.btn{
+    margin-right: 2%;
+}
+.fieldset-section{
+    text-align: right;
+}
+fieldset{
+   border:2px solid goldenrod;
+   margin-right: 5%;
+     display: inline-block;
+   font-size:12px;
+  padding-right:2px;
+  padding-left: 4px;
+
+}
+legend{
+    font-size: medium;
+    color: goldenrod;
+}
+.img{
+    width:250px;
+    height: 150px;
+}
+.item{
+  padding-bottom: 10%;
+}
+.right{
+  text-align: right;
+}
+
+
