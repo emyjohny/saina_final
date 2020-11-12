@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-9 player-section">
        
-            <video id="vjs-player" class="video-js" controls playsinline preload="none"></video>
+            <video id="vjs-player" class="video-js vjs-big-play-centered" controls playsinline preload="none"></video>
             &nbsp;
             <div class="row">
                 <div class="col-sm-6 left">
@@ -26,14 +26,14 @@
                     {{details.category}}|{{details.duration}}|{{details.maturityRating}}|⭐{{details.rating}}
                 </div>
                 <div class="col-sm-6 fieldset-section" >
-                    <fieldset>
-                            <legend>Subscribe</legend>
-                            👑Get Premium
+                    <fieldset class="border p-2" id="f-sub">
+                            <legend class="w-auto leg-subscribe">Subscribe</legend>
+                            <h6 class="field-content"> 👑 Get Premium </h6>   
                             <!-- <button type="button" class="btn btn-dark"> </button> -->
-                        </fieldset>
-                        <fieldset>
-                            <legend>Rent</legend>
-                            90
+                        </fieldset >
+                        <fieldset class="border p-2" id="f-rent">
+                            <legend class="w-auto leg-rent">Rent</legend>
+                            <h6 class="field-content"> 90 &#8377; </h6>
                             <!-- <button type="button" class="btn btn-dark"></button> -->
                         </fieldset>
                 </div>

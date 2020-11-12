@@ -7,7 +7,7 @@ import { Router} from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  slide ; 
+  slides :[]; 
   id="";
   video_selected=true;
   
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   getBanner(){
      this.dataservice.getBanner()
     .subscribe((resp:any)=>{
-      this.slide=resp[0].thumbUrl
+      this.slides=resp;
      
     })
   }

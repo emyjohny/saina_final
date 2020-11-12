@@ -30,7 +30,7 @@
 }
 .sections {
     padding: 50px 0px;
-    padding: 10px 0px;
+  
 }
  img {
     width: 150px;
@@ -41,3 +41,10 @@ ngb-carousel {
     width: inherit;
     height: inherit;
 }
+.carousel-control-prev-icon{
+    z-index: -1;
+    opacity: 0.2;
+}
+.no-indicators, .carousel-indicators {
+    display: none;
+  }

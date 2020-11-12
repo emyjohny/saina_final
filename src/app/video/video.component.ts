@@ -1,52 +1,52 @@
-import { Component, OnInit ,Input, SimpleChanges, OnDestroy, ElementRef, ViewChild, OnChanges, AfterViewInit} from '@angular/core';
+import { Component, OnInit ,Input, SimpleChanges, OnDestroy, OnChanges, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
 import videojs from 'video.js';
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
-  styleUrls: ['./video.component.css']
+  styleUrls: ['./video.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class VideoComponent implements OnInit, OnChanges, AfterViewInit {
+export class VideoComponent implements OnInit, OnChanges,  OnDestroy {
   @Input() id;
   // @ViewChild('target', {static: true}) target: ElementRef;
   // see options: https://github.com/videojs/video.js/blob/mastertutorial-options.html
   
   player: videojs.Player;
   @Input() videoArray:any[];
-  urlVideo; urlPoster;
+  urlVideohls; urlVideoOrg; urlPoster;
   details:[];
   cast:[];
   test: string[] = []; 
-  constructor(private dataservice:DataService, private elementref: ElementRef) {
+  constructor(private dataservice:DataService) {
     
    }
 
    ngOnInit() {
-    // alert("hai")
-    console.log(this.videoArray)
-    for(var i=0; i< this.videoArray.length; i++) {
+     for(var i=0; i< this.videoArray.length; i++) {
       this.test.push(this.videoArray[i].thumbUrl);
     }
       }
 
   ngOnChanges(changes: SimpleChanges){
-    // alert("i got called");
-    
+        
    this.getIdFunction(this.id);
   
   }
   getIdFunction(idFromCarousel){
     this.id=idFromCarousel
-   
       this.dataservice.getDetails(this.id)
       .subscribe((resp:any)=>{
         // console.log(resp)
-      this.urlVideo = resp.data[0]['videoUrl'].hls;
-      console.log(this.urlVideo)
-      this.details=resp.data[0];
-      this.cast=resp.data[0]['castCrew']
-      // console.log(this.cast)
+        this.urlVideohls = resp.data[0]['videoUrl'].hls;
+        this.urlVideoOrg = resp.data[0]['videoUrl'].original;
+        // console.log(this.urlVideoOrg)
+        this.urlPoster = resp.data[0]['videoBgUrl'];
+        this.details=resp.data[0];
+        // console.log(this.details)
+        this.cast=resp.data[0]['castCrew']; 
+          this.playVideo();  
       
       })
       
@@ -54,19 +54,26 @@ export class VideoComponent implements OnInit, OnChanges, AfterViewInit {
   }
   getId(idFromCarousel){
 this.id=idFromCarousel;
-alert(this.id);
 this.getIdFunction(this.id);
   }
-  ngAfterViewInit() {
-    const options = {
-      'sources' : [{
-        'src' : this.urlVideo,
-        'type' : 'application/x-mpegURL'
-        }
-      ],
-      'poster' : this.urlPoster
-    };
-    this.player = videojs('vjs-player', options);
+  playVideo() {
+    var myPlayer = videojs('vjs-player');
+    myPlayer.src([{
+      type: 'application/x-mpegURL',
+      src: this.urlVideohls
+    },     
+    {
+      type:'video/mp4',
+      src: this.urlVideoOrg
+    }]);
+    myPlayer.poster(this.urlPoster);
+  }
 
+  ngOnDestroy() {
+    // destroy player
+    if (this.player) {
+      this.player.dispose();
+
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -8,7 +8,7 @@ import { DataService } from '../services/data.service';
 })
 export class NavbarComponent implements OnInit {
   status=false;
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,private router:Router) { }
 
   ngOnInit(): void {
   }
